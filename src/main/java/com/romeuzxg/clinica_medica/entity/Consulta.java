@@ -33,9 +33,9 @@ public class Consulta {
 
     @NotBlank
     @Column(name = "status_consulta", nullable = false)
-    private enums status;
+    private Consulta.Enums status;
 
-    private enum enums {
+    public enum Enums {
         ATIVO, DESLIGADO
     }
 
