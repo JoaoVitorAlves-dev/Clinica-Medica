@@ -15,7 +15,7 @@ public class ConsultaMapper {
         consulta.setPaciente(paciente);
         consulta.setMedico(medico);
         consulta.setDataHora(consultaRequest.dataHora());
-        consulta.setStatus((Consulta.Enums) consultaRequest.status());
+        consulta.setStatus(consultaRequest.status());
         return consulta;
     }
 

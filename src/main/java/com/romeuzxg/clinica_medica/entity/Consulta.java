@@ -1,5 +1,6 @@
 package com.romeuzxg.clinica_medica.entity;
 
+import com.romeuzxg.clinica_medica.enums.StatusConsulta;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -33,10 +34,6 @@ public class Consulta {
 
     @NotBlank
     @Column(name = "status_consulta", nullable = false)
-    private Consulta.Enums status;
-
-    public enum Enums {
-        ATIVO, DESLIGADO
-    }
+    private StatusConsulta status;
 
 }
