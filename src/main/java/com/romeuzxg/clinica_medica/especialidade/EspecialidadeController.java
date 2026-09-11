@@ -26,7 +26,7 @@ public class EspecialidadeController {
         return ResponseEntity.ok(especialidadeService.findById(id));
     }
 
-    @GetMapping
+    @GetMapping("/procurar")
     public ResponseEntity<EspecialidadeResponse> findByEspecialidade(@RequestBody EspecialidadeRequest especialidadeRequest) {
         return ResponseEntity.ok(especialidadeService.findByEspecialidade(especialidadeRequest));
     }

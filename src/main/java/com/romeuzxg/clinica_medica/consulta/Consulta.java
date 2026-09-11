@@ -29,11 +29,9 @@ public class Consulta {
     @JoinColumn(name = "medicoId")
     private Medico medico;
 
-    @NotBlank
     @Column(name = "data_hora_consulta", nullable = false)
     private LocalDateTime dataHora;
 
-    @NotBlank
     @Column(name = "status_consulta", nullable = false)
     private StatusConsulta status;
 

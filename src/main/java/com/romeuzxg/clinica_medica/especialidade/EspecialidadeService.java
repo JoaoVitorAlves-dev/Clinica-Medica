@@ -3,7 +3,6 @@ package com.romeuzxg.clinica_medica.especialidade;
 import com.romeuzxg.clinica_medica.especialidade.dto.EspecialidadeRequest;
 import com.romeuzxg.clinica_medica.especialidade.dto.EspecialidadeResponse;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
-import com.romeuzxg.clinica_medica.medico.MedicoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,6 @@ import java.util.List;
 public class EspecialidadeService {
 
     private final EspecialidadeRepository especialidadeRepository;
-    private final MedicoRepository medicoRepository;
 
     public List<EspecialidadeResponse> findAll() {
         return especialidadeRepository.findAll().stream()
@@ -29,7 +27,7 @@ public class EspecialidadeService {
     }
 
     public EspecialidadeResponse findByEspecialidade(EspecialidadeRequest especialidade) {
-        Especialidade byEspecialidade = medicoRepository.findByEspecialidade(EspecialidadeMapper.toEntity(especialidade));
+        Especialidade byEspecialidade = especialidadeRepository.findByEspecialidade(EspecialidadeMapper.toEntity(especialidade));
         return EspecialidadeMapper.toDTO(byEspecialidade);
     }
 

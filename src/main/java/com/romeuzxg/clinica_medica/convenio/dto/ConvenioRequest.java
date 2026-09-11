@@ -1,4 +1,7 @@
 package com.romeuzxg.clinica_medica.convenio.dto;
 
-public record ConvenioRequest(String nome, Long pacienteId) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record ConvenioRequest(@NotNull String nome, @NotBlank Long pacienteId) {
 }
