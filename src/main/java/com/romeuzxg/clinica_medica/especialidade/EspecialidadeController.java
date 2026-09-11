@@ -26,6 +26,11 @@ public class EspecialidadeController {
         return ResponseEntity.ok(especialidadeService.findById(id));
     }
 
+    @GetMapping
+    public ResponseEntity<EspecialidadeResponse> findByEspecialidade(@RequestBody EspecialidadeRequest especialidadeRequest) {
+        return ResponseEntity.ok(especialidadeService.findByEspecialidade(especialidadeRequest));
+    }
+
     @PostMapping
     public ResponseEntity<EspecialidadeResponse> save(@RequestBody EspecialidadeRequest especialidadeRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(especialidadeService.save(especialidadeRequest));
