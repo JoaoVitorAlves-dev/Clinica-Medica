@@ -22,11 +22,10 @@ public class Paciente {
     @Column(name = "nome", length = 80, nullable = false)
     private String nome;
 
-    @Column(name = "cpf", length = 14, nullable = false)
+    @Column(name = "cpf", length = 14, nullable = false, unique = true)
     private String cpf;
 
-    @NotBlank
-    @Column(name = "email", length = 320, nullable = false)
+    @Column(name = "email", length = 320, nullable = false, unique = true)
     private String email;
 
     @Column(name = "data_nascimento", nullable = false)

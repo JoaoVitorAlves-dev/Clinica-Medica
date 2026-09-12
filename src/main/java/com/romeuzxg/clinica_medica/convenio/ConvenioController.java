@@ -2,6 +2,7 @@ package com.romeuzxg.clinica_medica.convenio;
 
 import com.romeuzxg.clinica_medica.convenio.dto.ConvenioRequest;
 import com.romeuzxg.clinica_medica.convenio.dto.ConvenioResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,12 @@ public class ConvenioController {
     }
 
     @PostMapping
-    public ResponseEntity<ConvenioResponse> save(@RequestBody ConvenioRequest convenioRequest) {
+    public ResponseEntity<ConvenioResponse> save(@RequestBody @Valid ConvenioRequest convenioRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(convenioService.save(convenioRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ConvenioResponse> updateById(@PathVariable Long id, @RequestBody ConvenioRequest convenioRequest) {
+    public ResponseEntity<ConvenioResponse> updateById(@PathVariable Long id, @RequestBody @Valid ConvenioRequest convenioRequest) {
         return ResponseEntity.ok(convenioService.updateById(id, convenioRequest));
     }
 

@@ -2,6 +2,7 @@ package com.romeuzxg.clinica_medica.consulta;
 
 import com.romeuzxg.clinica_medica.consulta.dto.ConsultaRequest;
 import com.romeuzxg.clinica_medica.consulta.dto.ConsultaResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,12 @@ public class ConsultaController {
     }
 
     @PostMapping
-    public ResponseEntity<ConsultaResponse> save(@RequestBody ConsultaRequest consultaRequest) {
+    public ResponseEntity<ConsultaResponse> save(@RequestBody @Valid ConsultaRequest consultaRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(consultaService.save(consultaRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ConsultaResponse> updateById(@PathVariable Long id, @RequestBody ConsultaRequest consultaRequest) {
+    public ResponseEntity<ConsultaResponse> updateById(@PathVariable Long id, @RequestBody @Valid ConsultaRequest consultaRequest) {
         return ResponseEntity.ok(consultaService.updateById(id, consultaRequest));
     }
 

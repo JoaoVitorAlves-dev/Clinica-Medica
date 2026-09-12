@@ -32,6 +32,7 @@ public class Consulta {
     @Column(name = "data_hora_consulta", nullable = false)
     private LocalDateTime dataHora;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status_consulta", nullable = false)
     private StatusConsulta status;
 

@@ -6,5 +6,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record PacienteRequest(@NotNull String nome, @NotNull String cpf, @Email String email, @NotBlank LocalDate dataNascimento) {
+public record PacienteRequest(@NotBlank String nome, @NotBlank String cpf, @NotBlank @Email String email, @NotNull LocalDate dataNascimento) {
 }

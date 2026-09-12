@@ -26,9 +26,10 @@ public class EspecialidadeService {
         return EspecialidadeMapper.toDTO(especialidade);
     }
 
-    public EspecialidadeResponse findByEspecialidade(EspecialidadeRequest especialidade) {
-        Especialidade byEspecialidade = especialidadeRepository.findByEspecialidade(EspecialidadeMapper.toEntity(especialidade));
-        return EspecialidadeMapper.toDTO(byEspecialidade);
+    public List<EspecialidadeResponse> findByEspecialidade(String nome) {
+        return especialidadeRepository.findByNomeContainingIgnoreCase(nome).stream()
+                .map(EspecialidadeMapper::toDTO)
+                .toList();
     }
 
     public EspecialidadeResponse save(EspecialidadeRequest especialidadeRequest) {

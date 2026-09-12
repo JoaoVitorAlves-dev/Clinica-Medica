@@ -1,6 +1,6 @@
 package com.romeuzxg.clinica_medica.especialidade.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
-public record EspecialidadeRequest(@NotNull String nome) {
+public record EspecialidadeRequest(@NotBlank String nome) {
 }

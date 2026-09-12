@@ -1,9 +1,9 @@
 package com.romeuzxg.clinica_medica.consulta.dto;
 
 import com.romeuzxg.clinica_medica.consulta.StatusConsulta;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record ConsultaRequest(@NotBlank Long pacienteId, @NotBlank Long medicoId, @NotBlank LocalDateTime dataHora, @NotBlank StatusConsulta status) {
+public record ConsultaRequest(@NotNull Long pacienteId, @NotNull Long medicoId, @NotNull LocalDateTime dataHora, @NotNull StatusConsulta status) {
 }

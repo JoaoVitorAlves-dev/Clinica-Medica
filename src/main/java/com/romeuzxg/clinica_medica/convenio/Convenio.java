@@ -17,11 +17,11 @@ public class Convenio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "pacienteId")
+    @JoinColumn(name = "pacienteId", nullable = false)
     private Paciente paciente;
 
 }

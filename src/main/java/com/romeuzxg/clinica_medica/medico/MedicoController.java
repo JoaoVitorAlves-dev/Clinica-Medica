@@ -2,6 +2,7 @@ package com.romeuzxg.clinica_medica.medico;
 
 import com.romeuzxg.clinica_medica.medico.dto.MedicoRequest;
 import com.romeuzxg.clinica_medica.medico.dto.MedicoResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,12 @@ public class MedicoController {
     }
 
     @PostMapping
-    public ResponseEntity<MedicoResponse> save(@RequestBody MedicoRequest medicoRequest) {
+    public ResponseEntity<MedicoResponse> save(@RequestBody @Valid MedicoRequest medicoRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(medicoService.save(medicoRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MedicoResponse> updateById(@PathVariable Long id, @RequestBody MedicoRequest medicoRequest) {
+    public ResponseEntity<MedicoResponse> updateById(@PathVariable Long id, @RequestBody @Valid MedicoRequest medicoRequest) {
         return ResponseEntity.ok(medicoService.updateById(id, medicoRequest));
     }
 

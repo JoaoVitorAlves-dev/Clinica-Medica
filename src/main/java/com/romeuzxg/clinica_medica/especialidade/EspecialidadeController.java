@@ -17,18 +17,16 @@ public class EspecialidadeController {
     private final EspecialidadeService especialidadeService;
 
     @GetMapping
-    public ResponseEntity<List<EspecialidadeResponse>> findAll() {
+    public ResponseEntity<List<EspecialidadeResponse>> findAll(@RequestParam(required = false) String nome) {
+        if (nome != null && !nome.isBlank()) {
+            return ResponseEntity.ok(especialidadeService.findByEspecialidade(nome));
+        }
         return ResponseEntity.ok(especialidadeService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EspecialidadeResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(especialidadeService.findById(id));
-    }
-
-    @GetMapping("/procurar")
-    public ResponseEntity<EspecialidadeResponse> findByEspecialidade(@RequestBody EspecialidadeRequest especialidadeRequest) {
-        return ResponseEntity.ok(especialidadeService.findByEspecialidade(especialidadeRequest));
     }
 
     @PostMapping
