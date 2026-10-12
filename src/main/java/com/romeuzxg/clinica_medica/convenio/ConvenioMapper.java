@@ -1,7 +1,7 @@
 package com.romeuzxg.clinica_medica.convenio;
 
-import com.romeuzxg.clinica_medica.convenio.dto.ConvenioRequest;
-import com.romeuzxg.clinica_medica.convenio.dto.ConvenioResponse;
+import com.romeuzxg.clinica_medica.convenio.dto.request.ConvenioRequest;
+import com.romeuzxg.clinica_medica.convenio.dto.response.ConvenioResponse;
 import com.romeuzxg.clinica_medica.paciente.Paciente;
 import lombok.experimental.UtilityClass;
 

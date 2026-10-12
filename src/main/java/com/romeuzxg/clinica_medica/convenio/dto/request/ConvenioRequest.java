@@ -1,4 +1,4 @@
-package com.romeuzxg.clinica_medica.convenio.dto;
+package com.romeuzxg.clinica_medica.convenio.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

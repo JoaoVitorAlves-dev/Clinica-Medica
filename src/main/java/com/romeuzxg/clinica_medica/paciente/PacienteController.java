@@ -1,7 +1,7 @@
 package com.romeuzxg.clinica_medica.paciente;
 
-import com.romeuzxg.clinica_medica.paciente.dto.PacienteRequest;
-import com.romeuzxg.clinica_medica.paciente.dto.PacienteResponse;
+import com.romeuzxg.clinica_medica.paciente.dto.request.PacienteRequest;
+import com.romeuzxg.clinica_medica.paciente.dto.response.PacienteResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,8 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")

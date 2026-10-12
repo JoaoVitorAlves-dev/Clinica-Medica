@@ -1,7 +1,7 @@
 package com.romeuzxg.clinica_medica.medico;
 
-import com.romeuzxg.clinica_medica.medico.dto.MedicoRequest;
-import com.romeuzxg.clinica_medica.medico.dto.MedicoResponse;
+import com.romeuzxg.clinica_medica.medico.dto.request.MedicoRequest;
+import com.romeuzxg.clinica_medica.medico.dto.response.MedicoResponse;
 import com.romeuzxg.clinica_medica.especialidade.Especialidade;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
 import com.romeuzxg.clinica_medica.especialidade.EspecialidadeRepository;
@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

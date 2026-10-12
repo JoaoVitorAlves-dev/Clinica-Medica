@@ -1,4 +1,4 @@
-package com.romeuzxg.clinica_medica.paciente.dto;
+package com.romeuzxg.clinica_medica.paciente.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

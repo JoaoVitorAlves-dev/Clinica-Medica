@@ -1,7 +1,7 @@
 package com.romeuzxg.clinica_medica.especialidade;
 
-import com.romeuzxg.clinica_medica.especialidade.dto.EspecialidadeRequest;
-import com.romeuzxg.clinica_medica.especialidade.dto.EspecialidadeResponse;
+import com.romeuzxg.clinica_medica.especialidade.dto.request.EspecialidadeRequest;
+import com.romeuzxg.clinica_medica.especialidade.dto.response.EspecialidadeResponse;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package com.romeuzxg.clinica_medica.paciente.dto;
+package com.romeuzxg.clinica_medica.paciente.dto.response;
 
 import java.time.LocalDate;
 

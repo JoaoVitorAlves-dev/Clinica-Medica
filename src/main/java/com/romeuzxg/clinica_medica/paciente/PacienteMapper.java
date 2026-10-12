@@ -1,7 +1,7 @@
 package com.romeuzxg.clinica_medica.paciente;
 
-import com.romeuzxg.clinica_medica.paciente.dto.PacienteRequest;
-import com.romeuzxg.clinica_medica.paciente.dto.PacienteResponse;
+import com.romeuzxg.clinica_medica.paciente.dto.request.PacienteRequest;
+import com.romeuzxg.clinica_medica.paciente.dto.response.PacienteResponse;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

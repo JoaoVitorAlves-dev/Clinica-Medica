@@ -1,14 +1,12 @@
 package com.romeuzxg.clinica_medica.paciente;
 
-import com.romeuzxg.clinica_medica.paciente.dto.PacienteRequest;
-import com.romeuzxg.clinica_medica.paciente.dto.PacienteResponse;
+import com.romeuzxg.clinica_medica.paciente.dto.request.PacienteRequest;
+import com.romeuzxg.clinica_medica.paciente.dto.response.PacienteResponse;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

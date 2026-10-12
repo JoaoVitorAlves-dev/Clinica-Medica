@@ -1,4 +1,4 @@
-package com.romeuzxg.clinica_medica.consulta.dto;
+package com.romeuzxg.clinica_medica.consulta.dto.response;
 
 import com.romeuzxg.clinica_medica.consulta.StatusConsulta;
 

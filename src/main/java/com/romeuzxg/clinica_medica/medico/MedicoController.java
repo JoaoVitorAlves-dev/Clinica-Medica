@@ -1,7 +1,7 @@
 package com.romeuzxg.clinica_medica.medico;
 
-import com.romeuzxg.clinica_medica.medico.dto.MedicoRequest;
-import com.romeuzxg.clinica_medica.medico.dto.MedicoResponse;
+import com.romeuzxg.clinica_medica.medico.dto.request.MedicoRequest;
+import com.romeuzxg.clinica_medica.medico.dto.response.MedicoResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
