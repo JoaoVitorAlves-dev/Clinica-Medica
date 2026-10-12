@@ -2,6 +2,7 @@ package com.romeuzxg.clinica_medica.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,8 +28,10 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/usuarios/cadastrar").permitAll()
-                        .requestMatchers("/usuarios/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuarios/cadastrar", "/usuarios/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/usuarios/listar/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/deletar/{id]").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 

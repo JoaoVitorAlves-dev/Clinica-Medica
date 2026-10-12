@@ -17,27 +17,27 @@ public class PacienteController {
 
     private final PacienteService pacienteService;
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<PacienteResponse>> findAll() {
         return ResponseEntity.ok(pacienteService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<PacienteResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(pacienteService.findById(id));
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<PacienteResponse> save(@RequestBody @Valid PacienteRequest pacienteRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.save(pacienteRequest));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<PacienteResponse> updateById(@PathVariable Long id, @RequestBody @Valid PacienteRequest pacienteRequest) {
         return ResponseEntity.ok(pacienteService.updateById(id, pacienteRequest));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         pacienteService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
