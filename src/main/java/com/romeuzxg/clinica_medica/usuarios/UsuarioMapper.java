@@ -1,22 +1,22 @@
 package com.romeuzxg.clinica_medica.usuarios;
 
-import com.romeuzxg.clinica_medica.usuarios.dto.request.UserRequest;
-import com.romeuzxg.clinica_medica.usuarios.dto.response.UserResponse;
+import com.romeuzxg.clinica_medica.usuarios.dto.request.UsuarioRequest;
+import com.romeuzxg.clinica_medica.usuarios.dto.response.UsuarioResponse;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class UsuarioMapper {
 
-    public User toEntity(UserRequest userRequest) {
-        User user = new User();
-        user.setNome(userRequest.nome());
-        user.setSenha(userRequest.senha());
-        return user;
+    public Usuario toEntity(UsuarioRequest usuarioRequest) {
+        Usuario usuario = new Usuario();
+        usuario.setNome(usuarioRequest.nome());
+        usuario.setSenha(usuarioRequest.senha());
+        return usuario;
     }
 
-    public UserResponse toDTO(User user) {
-        return new UserResponse(
-                user.getId(), user.getNome(), user.getRole().getNome()
+    public UsuarioResponse toDTO(Usuario usuario) {
+        return new UsuarioResponse(
+                usuario.getId(), usuario.getNome(), usuario.getRole().getNome()
         );
     }
 

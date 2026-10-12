@@ -1,6 +1,6 @@
 package com.romeuzxg.clinica_medica.usuarios.dto.request;
 
-public record UserRequest(
+public record UsuarioRequest(
         String nome,
         String senha
 ) {

@@ -21,6 +21,6 @@ public class Role {
     private String nome;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
-    private Set<User> users;
+    private Set<Usuario> usuarios;
 
 }

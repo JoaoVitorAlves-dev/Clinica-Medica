@@ -1,6 +1,6 @@
 package com.romeuzxg.clinica_medica.usuarios.dto.response;
 
-public record UserResponse(
+public record UsuarioResponse(
         Long id,
         String username,
         String role
