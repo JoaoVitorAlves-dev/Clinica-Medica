@@ -1,11 +1,15 @@
 package com.romeuzxg.clinica_medica.usuarios;
 
+import com.romeuzxg.clinica_medica.config.TokenService;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
+import com.romeuzxg.clinica_medica.usuarios.dto.request.LoginRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.UsuarioRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.response.UsuarioResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,8 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
 
     public UsuarioResponse cadastrar(UsuarioRequest usuarioRequest) {
         if (usuarioRepository.existsByNome(usuarioRequest.nome())) {
@@ -34,6 +40,17 @@ public class UsuarioService {
         entity.setRole(user);
 
         return UsuarioMapper.toDTO(usuarioRepository.save(entity));
+    }
+
+    public String login(LoginRequest loginRequest) {
+        Usuario usuario = usuarioRepository.findByNome(loginRequest.nome())
+                .orElseThrow(() -> new IdNotFoundException("Usuario não encontrado."));
+
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+                = new UsernamePasswordAuthenticationToken(usuario.getNome(), usuario.getSenha());
+
+        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        return tokenService.gerarToken(loginRequest.nome());
     }
 
     public Page<UsuarioResponse> listar(Pageable pageable) {
