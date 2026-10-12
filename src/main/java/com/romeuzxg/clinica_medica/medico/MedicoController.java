@@ -22,7 +22,7 @@ public class MedicoController {
         return ResponseEntity.ok(medicoService.findAll(pageable));
     }
 
-    @GetMapping("listar/{id}")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<MedicoResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(medicoService.findById(id));
     }

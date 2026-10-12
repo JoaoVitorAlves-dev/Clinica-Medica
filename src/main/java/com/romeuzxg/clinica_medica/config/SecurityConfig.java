@@ -29,9 +29,35 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/usuarios/cadastrar", "/usuarios/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuarios/listar/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/usuarios/listar/**").hasAnyRole("ADMIN", "MEDICO")
                         .requestMatchers(HttpMethod.DELETE, "/usuarios/deletar/{id]").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/consultas/cadastrar").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/consultas/atualizar/{id}").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/consultas/listar/**").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/consultas/deletar/{id}").hasAnyRole("MEDICO", "ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/convenios/cadastrar").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/convenios/atualizar/**").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/convenios/listar/**").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/convenios/deletar/{id}").hasAnyRole("MEDICO", "ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/especialidades/cadastrar").hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/especialidades/atualizar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/especialidades/listar/**").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/especialidades/deletar/{id}").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/medicos/cadastrar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/medicos/atualizar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/medicos/listar/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/medicos/deletar/{id}").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/pacientes/cadastrar").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/pacientes/atualizar/{id}").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/pacientes/listar/**").hasAnyRole("MEDICO", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/pacientes/deletar/{id}").hasAnyRole("MEDICO", "ADMIN")
+
                         .anyRequest().authenticated())
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
