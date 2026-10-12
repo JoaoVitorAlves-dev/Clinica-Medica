@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,15 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+
+    public Page<UsuarioResponse> listar(Pageable pageable) {
+        return usuarioRepository.findAll(pageable).map(UsuarioMapper::toDTO);
+    }
+
+    public UsuarioResponse findById(Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Usuario não encontrado."));
+        return UsuarioMapper.toDTO(usuario);
+    }
 
     public UsuarioResponse cadastrar(UsuarioRequest usuarioRequest) {
         if (usuarioRepository.existsByNome(usuarioRequest.nome())) {
@@ -51,10 +61,6 @@ public class UsuarioService {
 
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         return tokenService.gerarToken(loginRequest.nome());
-    }
-
-    public Page<UsuarioResponse> listar(Pageable pageable) {
-        return usuarioRepository.findAll(pageable).map(UsuarioMapper::toDTO);
     }
 
     public UsuarioResponse atualizar(Long id, UsuarioRequest usuarioRequest, String usernameAutenticado) {

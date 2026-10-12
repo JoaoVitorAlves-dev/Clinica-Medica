@@ -24,6 +24,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.listar(pageable));
     }
 
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<UsuarioResponse> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioService.findById(id));
+    }
+
     @PostMapping("/cadastrar")
     public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrar(usuarioRequest));
