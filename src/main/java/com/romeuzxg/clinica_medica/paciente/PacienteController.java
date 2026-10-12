@@ -4,6 +4,8 @@ import com.romeuzxg.clinica_medica.paciente.dto.PacienteRequest;
 import com.romeuzxg.clinica_medica.paciente.dto.PacienteResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,8 @@ public class PacienteController {
     private final PacienteService pacienteService;
 
     @GetMapping("/listar")
-    public ResponseEntity<List<PacienteResponse>> findAll() {
-        return ResponseEntity.ok(pacienteService.findAll());
+    public ResponseEntity<Page<PacienteResponse>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(pacienteService.findAll(pageable));
     }
 
     @GetMapping("/listar/{id}")

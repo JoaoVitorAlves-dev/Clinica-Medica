@@ -4,6 +4,8 @@ import com.romeuzxg.clinica_medica.especialidade.dto.EspecialidadeRequest;
 import com.romeuzxg.clinica_medica.especialidade.dto.EspecialidadeResponse;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +16,8 @@ public class EspecialidadeService {
 
     private final EspecialidadeRepository especialidadeRepository;
 
-    public List<EspecialidadeResponse> findAll() {
-        return especialidadeRepository.findAll().stream()
-                .map(EspecialidadeMapper::toDTO)
-                .toList();
+    public Page<EspecialidadeResponse> findAll(Pageable pageable) {
+        return especialidadeRepository.findAll(pageable).map(EspecialidadeMapper::toDTO);
     }
 
     public EspecialidadeResponse findById(Long id) {

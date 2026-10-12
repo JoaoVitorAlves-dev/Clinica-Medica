@@ -4,6 +4,8 @@ import com.romeuzxg.clinica_medica.paciente.dto.PacienteRequest;
 import com.romeuzxg.clinica_medica.paciente.dto.PacienteResponse;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +16,8 @@ public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
 
-    public List<PacienteResponse> findAll() {
-        return pacienteRepository.findAll().stream()
-                .map(PacienteMapper::toDTO)
-                .toList();
+    public Page<PacienteResponse> findAll(Pageable pageable) {
+        return pacienteRepository.findAll(pageable).map(PacienteMapper::toDTO);
     }
 
     public PacienteResponse findById(Long id) {

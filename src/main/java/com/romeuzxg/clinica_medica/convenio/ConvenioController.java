@@ -4,11 +4,11 @@ import com.romeuzxg.clinica_medica.convenio.dto.ConvenioRequest;
 import com.romeuzxg.clinica_medica.convenio.dto.ConvenioResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/convenios")
@@ -17,27 +17,27 @@ public class ConvenioController {
 
     private final ConvenioService convenioService;
 
-    @GetMapping
-    public ResponseEntity<List<ConvenioResponse>> findAll() {
-        return ResponseEntity.ok(convenioService.findAll());
+    @GetMapping("/listar")
+    public ResponseEntity<Page<ConvenioResponse>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(convenioService.findAll(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<ConvenioResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(convenioService.findById(id));
     }
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<ConvenioResponse> save(@RequestBody @Valid ConvenioRequest convenioRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(convenioService.save(convenioRequest));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<ConvenioResponse> updateById(@PathVariable Long id, @RequestBody @Valid ConvenioRequest convenioRequest) {
         return ResponseEntity.ok(convenioService.updateById(id, convenioRequest));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         convenioService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

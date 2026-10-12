@@ -6,6 +6,8 @@ import com.romeuzxg.clinica_medica.especialidade.Especialidade;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
 import com.romeuzxg.clinica_medica.especialidade.EspecialidadeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +19,8 @@ public class MedicoService {
     private final MedicoRepository medicoRepository;
     private final EspecialidadeRepository especialidadeRepository;
 
-    public List<MedicoResponse> findAll() {
-        return medicoRepository.findAll().stream()
-                .map(MedicoMapper::toDTO)
-                .toList();
+    public Page<MedicoResponse> findAll(Pageable pageable) {
+        return medicoRepository.findAll(pageable).map(MedicoMapper::toDTO);
     }
 
     public MedicoResponse findById(Long id) {

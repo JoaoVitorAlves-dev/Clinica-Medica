@@ -13,6 +13,8 @@ import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
 import com.romeuzxg.clinica_medica.medico.MedicoRepository;
 import com.romeuzxg.clinica_medica.paciente.PacienteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,10 +28,8 @@ public class ConsultaService {
     private final PacienteRepository pacienteRepository;
     private final MedicoRepository medicoRepository;
 
-    public List<ConsultaResponse> findAll() {
-        return consultaRepository.findAll().stream()
-                .map(ConsultaMapper::toDTO)
-                .toList();
+    public Page<ConsultaResponse> findAll(Pageable pageable) {
+        return consultaRepository.findAll(pageable).map(ConsultaMapper::toDTO);
     }
 
     public ConsultaResponse findById(Long id) {
