@@ -1,5 +1,6 @@
 package com.romeuzxg.clinica_medica.usuarios;
 
+import com.romeuzxg.clinica_medica.usuarios.dto.request.LoginRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.UsuarioRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.response.UsuarioResponse;
 import jakarta.validation.Valid;
@@ -26,6 +27,11 @@ public class UsuarioController {
     @PostMapping("/cadastrar")
     public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrar(usuarioRequest));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest loginRequest) {
+        return ResponseEntity.ok(usuarioService.login(loginRequest));
     }
 
     @PutMapping("/atualizar/{id}")
