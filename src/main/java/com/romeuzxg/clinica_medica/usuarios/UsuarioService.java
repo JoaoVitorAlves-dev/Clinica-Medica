@@ -2,6 +2,7 @@ package com.romeuzxg.clinica_medica.usuarios;
 
 import com.romeuzxg.clinica_medica.config.TokenService;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
+import com.romeuzxg.clinica_medica.exceptions.UsuarioNotFoundException;
 import com.romeuzxg.clinica_medica.refreshtoken.RefreshToken;
 import com.romeuzxg.clinica_medica.refreshtoken.RefreshTokenService;
 import com.romeuzxg.clinica_medica.refreshtoken.dto.response.RefreshTokenResponse;
