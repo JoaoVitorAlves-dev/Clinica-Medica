@@ -14,6 +14,9 @@ public class TokenService {
     @Value("${api.clinica.medica.secret.key}")
     private String secret;
 
+    @Value("api.clinica.medica-expiration-minutes")
+    private long expirationInMinutes;
+
     public SecretKey getChave() {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
@@ -22,7 +25,7 @@ public class TokenService {
         return Jwts.builder()
                 .signWith(getChave())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 3_600_000))
+                .expiration(new Date(System.currentTimeMillis() + expirationInMinutes))
                 .subject(username)
                 .compact();
     }
