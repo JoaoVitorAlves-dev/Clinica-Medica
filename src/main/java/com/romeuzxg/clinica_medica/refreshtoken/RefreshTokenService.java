@@ -1,5 +1,6 @@
 package com.romeuzxg.clinica_medica.refreshtoken;
 
+import com.romeuzxg.clinica_medica.exceptions.TokenNotFoundException;
 import com.romeuzxg.clinica_medica.usuarios.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
