@@ -1,7 +1,6 @@
 package com.romeuzxg.clinica_medica.usuarios;
 
-import com.romeuzxg.clinica_medica.refreshtoken.RefreshToken;
-import com.romeuzxg.clinica_medica.refreshtoken.RefreshTokenRepository;
+import com.romeuzxg.clinica_medica.refreshtoken.dto.request.RefreshTokenRequest;
 import com.romeuzxg.clinica_medica.refreshtoken.dto.response.RefreshTokenResponse;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.LoginRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.UsuarioRequest;
@@ -22,33 +21,44 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @GetMapping("/listar")
+    @PostMapping("/auth/refresh")
+    public ResponseEntity<RefreshTokenResponse> refresh(@Valid @RequestBody RefreshTokenRequest req) {
+        return ResponseEntity.ok(usuarioService.refreshToken(req.refreshToken()));
+    }
+
+    @GetMapping("/auth/listar")
     public ResponseEntity<Page<UsuarioResponse>> listar(Pageable pageable) {
         return ResponseEntity.ok(usuarioService.listar(pageable));
     }
 
-    @GetMapping("/listar/{id}")
+    @GetMapping("/auth/listar/{id}")
     public ResponseEntity<UsuarioResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.findById(id));
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/auth/cadastrar")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest) {
         usuarioService.cadastrar(usuarioRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<RefreshTokenResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
         return ResponseEntity.ok(usuarioService.login(loginRequest));
     }
 
-    @PutMapping("/atualizar/{id}")
+    @PutMapping("/auth/atualizar/{id}")
     public ResponseEntity<UsuarioResponse> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioRequest usuarioRequest, Authentication authentication) {
         return ResponseEntity.ok(usuarioService.atualizar(id, usuarioRequest, authentication.getName()));
     }
 
-    @DeleteMapping("/deletar/{id}")
+    @PostMapping("/auth/logout")
+    public ResponseEntity<Void> logout(@Valid @RequestBody RefreshTokenRequest req) {
+        usuarioService.logout(req);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/auth/deletar/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         usuarioService.deletar(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -2,9 +2,12 @@ package com.romeuzxg.clinica_medica.usuarios;
 
 import com.romeuzxg.clinica_medica.config.TokenService;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
+import com.romeuzxg.clinica_medica.exceptions.TokenNotFoundException;
 import com.romeuzxg.clinica_medica.exceptions.UsuarioNotFoundException;
 import com.romeuzxg.clinica_medica.refreshtoken.RefreshToken;
+import com.romeuzxg.clinica_medica.refreshtoken.RefreshTokenRepository;
 import com.romeuzxg.clinica_medica.refreshtoken.RefreshTokenService;
+import com.romeuzxg.clinica_medica.refreshtoken.dto.request.RefreshTokenRequest;
 import com.romeuzxg.clinica_medica.refreshtoken.dto.response.RefreshTokenResponse;
 import com.romeuzxg.clinica_medica.role.dto.Role;
 import com.romeuzxg.clinica_medica.role.dto.RoleRepository;
@@ -29,6 +32,14 @@ public class UsuarioService {
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
     private final RefreshTokenService refreshTokenService;
+
+    public RefreshTokenResponse refreshToken(String token) {
+        RefreshToken novo = refreshTokenService.validarERotacionar(token);
+
+        String access = tokenService.gerarToken(novo.getUsuario().getNome());
+
+        return new RefreshTokenResponse(access, novo.getToken());
+    }
 
     public Page<UsuarioResponse> listar(Pageable pageable) {
         return usuarioRepository.findAll(pageable).map(UsuarioMapper::toDTO);
@@ -84,6 +95,10 @@ public class UsuarioService {
         usuario.setSenha(passwordEncoder.encode(usuarioRequest.senha()));
 
         return UsuarioMapper.toDTO(usuarioRepository.save(usuario));
+    }
+
+    public void logout(RefreshTokenRequest req) {
+        refreshTokenService.apagarPorToken(req.refreshToken());
     }
 
     public void deletar(Long id) {
