@@ -2,6 +2,9 @@ package com.romeuzxg.clinica_medica.usuarios;
 
 import com.romeuzxg.clinica_medica.config.TokenService;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
+import com.romeuzxg.clinica_medica.refreshtoken.RefreshToken;
+import com.romeuzxg.clinica_medica.refreshtoken.RefreshTokenService;
+import com.romeuzxg.clinica_medica.refreshtoken.dto.response.RefreshTokenResponse;
 import com.romeuzxg.clinica_medica.role.dto.Role;
 import com.romeuzxg.clinica_medica.role.dto.RoleRepository;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.LoginRequest;
@@ -24,6 +27,7 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final RefreshTokenService refreshTokenService;
 
     public Page<UsuarioResponse> listar(Pageable pageable) {
         return usuarioRepository.findAll(pageable).map(UsuarioMapper::toDTO);
@@ -34,7 +38,7 @@ public class UsuarioService {
         return UsuarioMapper.toDTO(usuario);
     }
 
-    public UsuarioResponse cadastrar(UsuarioRequest usuarioRequest) {
+    public void cadastrar(UsuarioRequest usuarioRequest) {
         if (usuarioRepository.existsByNome(usuarioRequest.nome())) {
             throw new IdNotFoundException("Usuario já esta sendo usado.");
         }
@@ -50,7 +54,7 @@ public class UsuarioService {
         entity.setSenha(passwordEncoder.encode(usuarioRequest.senha()));
         entity.setRole(user);
 
-        return UsuarioMapper.toDTO(usuarioRepository.save(entity));
+        usuarioRepository.save(entity);
     }
 
     public String login(LoginRequest loginRequest) {
