@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/usuarios/cadastrar", "/usuarios/login").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").authenticated()
                         .requestMatchers(HttpMethod.GET, "/usuarios/listar/**").hasAnyRole("ADMIN", "MEDICO")
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios/deletar/{id]").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/deletar/{id}").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/consultas/cadastrar").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/consultas/atualizar/{id}").hasAnyRole("MEDICO", "ADMIN")
