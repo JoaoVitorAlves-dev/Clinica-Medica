@@ -57,15 +57,16 @@ public class UsuarioService {
         usuarioRepository.save(entity);
     }
 
-    public String login(LoginRequest loginRequest) {
+    public RefreshTokenResponse login(LoginRequest loginRequest) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.nome(), loginRequest.senha()));
+
         Usuario usuario = usuarioRepository.findByNome(loginRequest.nome())
-                .orElseThrow(() -> new IdNotFoundException("Usuario não encontrado."));
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario não encontrado."));
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-                = new UsernamePasswordAuthenticationToken(usuario.getNome(), usuario.getSenha());
+        String access = tokenService.gerarToken(usuario.getNome());
+        String refresh = refreshTokenService.validarERotacionar(access).getToken();
 
-        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-        return tokenService.gerarToken(loginRequest.nome());
+        return new RefreshTokenResponse(access, refresh);
     }
 
     public UsuarioResponse atualizar(Long id, UsuarioRequest usuarioRequest, String usernameAutenticado) {
