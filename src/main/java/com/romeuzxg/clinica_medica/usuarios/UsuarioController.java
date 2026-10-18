@@ -1,5 +1,8 @@
 package com.romeuzxg.clinica_medica.usuarios;
 
+import com.romeuzxg.clinica_medica.refreshtoken.RefreshToken;
+import com.romeuzxg.clinica_medica.refreshtoken.RefreshTokenRepository;
+import com.romeuzxg.clinica_medica.refreshtoken.dto.response.RefreshTokenResponse;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.LoginRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.UsuarioRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.response.UsuarioResponse;
@@ -30,12 +33,13 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<UsuarioResponse> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrar(usuarioRequest));
+    public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioRequest usuarioRequest) {
+        usuarioService.cadastrar(usuarioRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest loginRequest) {
+    public ResponseEntity<RefreshTokenResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
         return ResponseEntity.ok(usuarioService.login(loginRequest));
     }
 
