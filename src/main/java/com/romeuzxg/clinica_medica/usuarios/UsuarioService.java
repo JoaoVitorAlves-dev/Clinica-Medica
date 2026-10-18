@@ -2,6 +2,8 @@ package com.romeuzxg.clinica_medica.usuarios;
 
 import com.romeuzxg.clinica_medica.config.TokenService;
 import com.romeuzxg.clinica_medica.exceptions.IdNotFoundException;
+import com.romeuzxg.clinica_medica.role.dto.Role;
+import com.romeuzxg.clinica_medica.role.dto.RoleRepository;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.LoginRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.request.UsuarioRequest;
 import com.romeuzxg.clinica_medica.usuarios.dto.response.UsuarioResponse;
@@ -12,7 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @RequiredArgsConstructor

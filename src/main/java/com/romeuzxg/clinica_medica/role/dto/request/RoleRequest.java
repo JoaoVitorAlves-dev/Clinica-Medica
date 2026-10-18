@@ -1,4 +1,4 @@
-package com.romeuzxg.clinica_medica.usuarios.dto.request;
+package com.romeuzxg.clinica_medica.role.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

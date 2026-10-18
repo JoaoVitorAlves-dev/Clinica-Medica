@@ -1,7 +1,7 @@
-package com.romeuzxg.clinica_medica.usuarios;
+package com.romeuzxg.clinica_medica.role.dto;
 
-import com.romeuzxg.clinica_medica.usuarios.dto.request.RoleRequest;
-import com.romeuzxg.clinica_medica.usuarios.dto.response.RoleResponse;
+import com.romeuzxg.clinica_medica.role.dto.request.RoleRequest;
+import com.romeuzxg.clinica_medica.role.dto.response.RoleResponse;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

@@ -1,5 +1,6 @@
 package com.romeuzxg.clinica_medica.usuarios;
 
+import com.romeuzxg.clinica_medica.role.dto.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
