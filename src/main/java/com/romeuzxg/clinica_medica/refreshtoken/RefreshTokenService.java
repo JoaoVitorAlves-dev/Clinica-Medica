@@ -13,8 +13,8 @@ import java.util.UUID;
 @Service
 public class RefreshTokenService {
 
-    @Value("${api.clinica.medica.expira.em.dias}")
-    private long expiraEmDias;
+    @Value("${api.clinica.medica.expiration.in.days}")
+    private Integer expiraEmDias;
 
     private final RefreshTokenRepository refreshTokenRepository;
 
