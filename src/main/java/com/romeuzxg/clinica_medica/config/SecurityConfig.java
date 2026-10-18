@@ -28,10 +28,10 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/usuarios/cadastrar", "/usuarios/login").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/usuarios/atualizar/{id}").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/usuarios/listar/**").hasAnyRole("ADMIN", "MEDICO")
-                        .requestMatchers(HttpMethod.DELETE, "/usuarios/deletar/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/usuarios/auth/cadastrar", "/usuarios/auth/login", "/usuarios/auth/refresh").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/usuarios/auth/atualizar/{id}").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/usuarios/auth/listar/**").hasAnyRole("ADMIN", "MEDICO")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/auth/deletar/{id}").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/consultas/cadastrar").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/consultas/atualizar/{id}").hasAnyRole("MEDICO", "ADMIN")
