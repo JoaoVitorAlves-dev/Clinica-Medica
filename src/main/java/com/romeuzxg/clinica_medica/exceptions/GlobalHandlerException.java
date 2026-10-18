@@ -14,7 +14,12 @@ import java.util.Map;
 public class GlobalHandlerException {
 
     @ExceptionHandler(IdNotFoundException.class)
-    public ResponseEntity<String> globalHandler(IdNotFoundException ex) {
+    public ResponseEntity<String> idNotFound(IdNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(TokenNotFoundException.class)
+    public ResponseEntity<String> tokenNotFound(TokenNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
